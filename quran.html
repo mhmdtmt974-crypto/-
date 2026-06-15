@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>كتاب الله</title>
+    <link rel="stylesheet" href="style.css">
+
+    <title>اختر القسم</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* 🛑 هنا يمكنك تغيير الخلفية: ضع اسم صورتك بدلاً من background.jpg */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1564769625905-50e93615e769');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(15, 23, 42, 0.85); /* لون داكن شفاف متناسق مع واجهة الصورة الأصلية */
+            padding: 35px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* جعل الخيارات تترتب عمودياً (تحت بعضها البعض) */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* لتبدأ الأيقونات والنصوص محاذية لليمين */
+            gap: 15px;
+            padding: 15px 20px;
+            background-color: #1e293b;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* تأثيرات حركة عند تمرير الفأرة (Hover) */
+        .btn:hover {
+            background-color: #3b82f6; /* يتحول للون الأزرق عند التأشير عليه */
+            border-color: #60a5fa;
+            transform: translateX(-5px); /* حركة خفيفة لليمين تعطي جمالية للتصفح */
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .icon {
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>اختر القسم</h2>
+        
+        <div class="options-list">
+            <!-- قسم القرآن الكريم -->
+            <a href="holy_quran.html" class="btn">
+                <span class="icon">📖</span>
+                <span>القرآن الكريم</span>
+            </a>
+
+            <!-- قسم التفسير -->
+            <a href="tafsir.html" class="btn">
+                <span class="icon">🔍</span>
+                <span>التفسير</span>
+            </a>
+
+            <!-- قسم الأحاديث النبوية -->
+            <a href="hadith_prophetic.html" class="btn">
+                <span class="icon">📚</span>
+                <span>الأحاديث النبوية</span>
+            </a>
+
+            <!-- قسم الأحاديث القدسية -->
+            <a href="hadith_qudsi.html" class="btn">
+                <span class="icon">🌙</span>
+                <span>الأحاديث القدسية</span>
+
+                            <!-- قسم حبيب -->
+            <a href="moqa.html" class="btn">
+                <span class="icon">📜</span>
+                <span>تعريف الموقع</span>
+            </a>
+
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

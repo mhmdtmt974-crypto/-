@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>كتاب الله</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+            padding: 30px 15px;
+        }
+
+        .header-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #334155;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-back:hover {
+            background-color: #475569;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #3b82f6;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            border: 1px solid #334155;
+            background-color: #1e293b;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .search-box:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* شبكة عرض الـ 114 سورة */
+        .surah-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .surah-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .surah-card:hover {
+            background: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            border-color: #60a5fa;
+        }
+
+        .surah-num {
+            background: rgba(255, 255, 255, 0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .surah-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .surah-info {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        /* 📖 واجهة عرض السورة (تصميم كـ كتاب مفتوح) 📖 */
+        .book-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fcfbf7; 
+            color: #1a1a1a; 
+            padding: 50px 40px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 30px 0 50px rgba(0,0,0,0.06); 
+            border-left: 12px solid #8B4513; 
+            min-height: 600px;
+            position: relative;
+        }
+
+        .book-title {
+            text-align: center;
+            font-size: 36px;
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .basmala {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 35px;
+            color: #4a4a4a;
+            font-weight: 500;
+        }
+
+        .book-content {
+            font-size: 25px;
+            line-height: 2.3;
+            text-align: justify;
+            direction: rtl;
+            word-spacing: 3px;
+        }
+
+        .ayah-num {
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 19px;
+            margin: 0 4px;
+            display: inline-block;
+        }
+
+        .loading-text {
+            text-align: center;
+            font-size: 20px;
+            color: #8B4513;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainView">
+        <div class="header-container">
+            <a href="quran.html" class="btn-back">⬅ العودة للقائمة الرئيسية</a>
+            <h1>القرآن الكريم كاملًا</h1>
+            <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن السورة...">
+        </div>
+
+        <div class="surah-grid" id="surahGrid">
+            </div>
+    </div>
+
+    <div id="bookView" style="display: none;">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button class="btn-back" onclick="closeBook()">⬅ العودة لقائمة السور</button>
+        </div>
+        
+        <div class="book-container">
+            <div class="book-title" id="currentSurahName">اسم السورة</div>
+            <div class="basmala" id="basmalaText">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="book-content" id="surahText">
+                <div class="loading-text">جاري تحميل آيات السورة بالرسم العثماني...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // مصفوفة بأسماء السور الـ 114 بالترتيب لتوليد القائمة فورا
+        const surahNames = [
+            "الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود",
+            "يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون",
+            "النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ",
+            "فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف",
+            "محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة",
+            "الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة",
+            "المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس",
+            "التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد",
+            "الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة",
+            "التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص",
+            "الفلق","الناس"
+        ];
+
+        const surahGrid = document.getElementById('surahGrid');
+
+        // 1. توليد كروت الـ 114 سورة تلقائياً عند فتح الصفحة
+        surahNames.forEach((name, index) => {
+            const surahNumber = index + 1;
+            const card = document.createElement('div');
+            card.className = 'surah-card';
+            card.setAttribute('onclick', `openSurah(${surahNumber}, '${name}')`);
+            card.innerHTML = `
+                <div class="surah-num">${surahNumber}</div>
+                <div class="surah-name">سورة ${name}</div>
+            `;
+            surahGrid.appendChild(card);
+        });
+
+        // 2. دالة جلب الآيات من الـ API عند الضغط على السورة
+        function openSurah(surahNumber, surahName) {
+            document.getElementById('mainView').style.display = 'none';
+            document.getElementById('bookView').style.display = 'block';
+            document.getElementById('currentSurahName').innerText = "سُورَةُ " + surahName;
+            document.getElementById('surahText').innerHTML = '<div class="loading-text">جاري تحميل آيات السورة بالرسم العثماني...</div>';
+            
+            // سورة الفاتحة (1) وسورة التوبة (9) لا تظهر لهما البسملة المستقلة في الكتاب
+            if (surahNumber === 1 || surahNumber === 9) {
+                document.getElementById('basmalaText').style.display = 'none';
+            } else {
+                document.getElementById('basmalaText').style.display = 'block';
+            }
+
+            // استدعاء الآيات بالرسم العثماني من الخادم الموثوق Alquran.cloud
+            fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/quran-uthmani`)
+                .then(response => response.json())
+                .then(data => {
+                    let ayahs = data.data.ayahs;
+                    let fullText = "";
+
+                    ayahs.forEach((ayah) => {
+                        let text = ayah.text;
+                        // إزالة البسملة من بداية السورة المجلوبة لأننا وضعناها بشكل مستقل ومنسق بأعلى الكتاب
+                        if (surahNumber !== 1 && ayah.numberInSurah === 1) {
+                            text = text.replace("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ", "");
+                            text = text.replace("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "");
+                        }
+                        fullText += text + ` <span class="ayah-num">﴿${ayah.numberInSurah}﴾</span> `;
+                    });
+
+                    document.getElementById('surahText').innerHTML = fullText;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch(error => {
+                    document.getElementById('surahText').innerHTML = '<div class="loading-text" style="color:red;">حدث خطأ أثناء تحميل السورة، يرجى التأكد من اتصالك بالإنترنت.</div>';
+                });
+        }
+
+        // 3. دالة إغلاق الكتاب
+        function closeBook() {
+            document.getElementById('bookView').style.display = 'none';
+            document.getElementById('mainView').style.display = 'block';
+        }
+
+        // 4. نظام البحث الفوري الذكي عن السور
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.getElementsByClassName('surah-card');
+
+        searchInput.addEventListener('input', function() {
+            const filter = searchInput.value.trim();
+            for (let i = 0; i < cards.length; i++) {
+                const name = cards[i].getElementsByClassName('surah-name')[0].textContent;
+                if (name.includes(filter)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
